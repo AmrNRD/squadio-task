@@ -14,7 +14,9 @@ class PersonLoadedState extends PersonState {
 
 class PersonsLoadedState extends PersonState {
   final List<Person> persons;
-  PersonsLoadedState(this.persons);
+  final int page;
+  final int totalNumberOfPage;
+  PersonsLoadedState(this.persons,this.page,this.totalNumberOfPage);
 }
 
 class PersonErrorState extends PersonState {

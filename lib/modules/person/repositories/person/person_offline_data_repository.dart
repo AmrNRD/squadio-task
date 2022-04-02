@@ -8,10 +8,18 @@ import 'package:squadio/modules/person/repositories/person/person_repository.dar
 
 class PersonOfflineDataRepository extends PersonRepository{
   @override
-  Future<List<Person>> getPopularPersons({int page = 1}) async {
-    var box = await Hive.openBox('testBox');
+  Future<Map<String,dynamic>> getPopularPersons({int page = 1}) async {
+    var box = await Hive.openBox('squadioBox');
+    final Map<String,dynamic>data={};
     List<Person> persons=box.get("persons",defaultValue: []);
-    return persons;
+
+    data['persons']=persons;
+
+    data['page']=1;
+
+    data['total_pages']=1;
+
+    return data;
   }
 
 }

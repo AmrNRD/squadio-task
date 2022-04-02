@@ -88,7 +88,7 @@ class Person {
       adult: map['adult'].toString()=="true",
       popularity: double.parse(map['popularity'].toString()),
       gender: int.parse(map['gender'].toString()),
-      knownFor: map['known_for']!=null?List<dynamic>.from((map['known_for'] as List).map((item)=>item["media_type"]=="movie"?Movie.fromJson(item):TvSeries.fromJson(item))):[],
+      knownFor: [],
     );
   }
 

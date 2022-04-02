@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
 import 'package:squadio/modules/person/repositories/person/person_repository.dart';
 
@@ -17,9 +18,10 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
   @override
   Stream<PersonState> mapEventToState(PersonEvent event) async* {
     try{
+      yield PersonLoadingState();
       if(event is GetPopularPersonsEvent){
-      List<Person>persons= await personRepository.getPopularPersons(page: event.page);
-      yield PersonsLoadedState(persons);
+     final Map<String,dynamic>data= await personRepository.getPopularPersons(page: event.page);
+      yield PersonsLoadedState(data['persons'] as List<Person>,data['page'] as int,data['total_pages'] as int);
       }
     }catch(error){
 
