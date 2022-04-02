@@ -1,6 +1,7 @@
 
 import 'package:flutter/foundation.dart' show FlutterError, defaultTargetPlatform, kDebugMode;
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../env.dart';
@@ -9,7 +10,7 @@ import '../env.dart';
 class SetUp{
 
   static Future<void> initApp() async{
-    //Admob initialize
+    await Hive.initFlutter();
   }
 
   static Future<ThemeMode> getTheme() async {
