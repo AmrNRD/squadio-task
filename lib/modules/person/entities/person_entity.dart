@@ -5,7 +5,7 @@ import 'package:squadio/modules/person/entities/tv_series_entity.dart';
 
 part 'generated/person_entity.g.dart';
 @HiveType(typeId: 3)
-class Person {
+class Person extends HiveObject{
   @HiveField(0)
   final int id;
   @HiveField(1)
@@ -20,6 +20,18 @@ class Person {
   final List<dynamic> knownFor;
   @HiveField(6)
   final int gender;
+  @HiveField(7)
+  final String? biography;
+  @HiveField(8)
+  final String? knownForDepartment;
+  @HiveField(9)
+  final String? placeOfBirth;
+  @HiveField(10)
+  final String? homepage;
+  @HiveField(11)
+  final String? imdb_id;
+  @HiveField(12)
+  final String? birthday;
 
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
@@ -31,7 +43,13 @@ class Person {
     required this.adult,
     required this.popularity,
     required this.knownFor,
-    required this.gender
+    required this.gender,
+    this.biography,
+    this.knownForDepartment,
+    this.placeOfBirth,
+    this.homepage,
+    this.imdb_id,
+    this.birthday,
   });
 
   Person copyWith({
@@ -88,7 +106,13 @@ class Person {
       adult: map['adult'].toString()=="true",
       popularity: double.parse(map['popularity'].toString()),
       gender: int.parse(map['gender'].toString()),
-      knownFor: [],
+      biography: map['biography']?.toString(),
+      knownForDepartment: map['known_for_department']?.toString(),
+      placeOfBirth: map['place_of_birth']?.toString(),
+      homepage: map['homepage']?.toString(),
+      imdb_id: map['imdb_id']?.toString(),
+      birthday: map['birthday']?.toString(),
+      knownFor: map['known_for']!=null?List<dynamic>.from((map['known_for'] as List).map((item)=>item["media_type"]=="movie"?Movie.fromJson(item):TvSeries.fromJson(item))):[],
     );
   }
 

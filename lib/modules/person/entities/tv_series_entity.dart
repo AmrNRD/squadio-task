@@ -1,9 +1,10 @@
 
 import 'package:hive/hive.dart';
+import 'package:squadio/core/utils/core.util.dart';
 
 part 'generated/tv_series_entity.g.dart';
 @HiveType(typeId: 2)
-class TvSeries{
+class TvSeries extends HiveObject{
   @HiveField(0)
   final int id;
   @HiveField(1)
@@ -27,13 +28,13 @@ class TvSeries{
   @HiveField(10)
   final String? backdropPath;
   @HiveField(11)
-  final double popularity;
+  final double? popularity;
   @HiveField(12)
-  final double voteCount;
+  final int voteCount;
   @HiveField(13)
   final bool video;
   @HiveField(14)
-  final double videoAverage;
+  final double? videoAverage;
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
@@ -68,7 +69,7 @@ class TvSeries{
     String? firstAirDate,
     String? backdropPath,
     double? popularity,
-    double? voteCount,
+    int? voteCount,
     bool? video,
     double? videoAverage,
   }) {
@@ -136,23 +137,23 @@ class TvSeries{
       videoAverage.hashCode;
 
   factory TvSeries.fromJson(Map<String, dynamic> map) {
-    return new TvSeries(
-      id: int.parse(map['id'].toString()),
-      name: map['name'].toString(),
-      originalName: map['original_name'].toString(),
-      posterPath: map['poster_path']?.toString(),
-      overview: map['overview'].toString(),
-      genreIds: map['genre_ids']!=null?List<int>.from((map['genre_ids'] as List).map((item) => int.parse(item.toString()))):[],
-      originCountries: map['origin_country']!=null?List<String>.from((map['origin_country'] as List).map((item) => item.toString())):[],
-      mediaType: map['media_type'].toString(),
-      originalLanguage: map['original_language'].toString(),
-      firstAirDate: map['first_air_date'].toString(),
-      backdropPath: map['backdrop_path']?.toString(),
-      popularity: double.parse(map['popularity'].toString()),
-      voteCount: double.parse(map['vote_count'].toString()),
-      video: map['video'].toString()=="true",
-      videoAverage: double.parse(map['video_average'].toString()),
-    );
+     return  TvSeries(
+       id: int.parse(map['id'].toString()),
+       name: map['name'].toString(),
+       originalName: map['original_name'].toString(),
+       posterPath: map['poster_path']?.toString(),
+       overview: map['overview'].toString(),
+       genreIds: map['genre_ids']!=null?List<int>.from((map['genre_ids'] as List).map((item) => int.parse(item.toString()))):[],
+       originCountries: map['origin_country']!=null?List<String>.from((map['origin_country'] as List).map((item) => item.toString())):[],
+       mediaType: map['media_type'].toString(),
+       originalLanguage: map['original_language'].toString(),
+       firstAirDate: map['first_air_date'].toString(),
+       backdropPath: map['backdrop_path']?.toString(),
+       popularity: double.tryParse(map['popularity'].toString()),
+       voteCount: int.parse(map['vote_count'].toString()),
+       video: map['video'].toString()=="true",
+       videoAverage: double.tryParse(map['video_average'].toString()),
+     );
   }
 
   Map<String, dynamic> toMap() {

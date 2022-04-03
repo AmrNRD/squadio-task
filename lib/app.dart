@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive/hive.dart';
 
 import 'core/app.localization.dart';
 import 'core/routes/route_generator.dart';
@@ -51,6 +52,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
   @override
   void dispose() {
+    Hive.close();
     super.dispose();
   }
 }

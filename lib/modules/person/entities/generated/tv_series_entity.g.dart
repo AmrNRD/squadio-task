@@ -28,10 +28,10 @@ class TvSeriesAdapter extends TypeAdapter<TvSeries> {
       originalLanguage: fields[8] as String,
       firstAirDate: fields[9] as String,
       backdropPath: fields[10] as String?,
-      popularity: fields[11] as double,
-      voteCount: fields[12] as double,
+      popularity: fields[11] as double?,
+      voteCount: fields[12] as int,
       video: fields[13] as bool,
-      videoAverage: fields[14] as double,
+      videoAverage: fields[14] as double?,
     );
   }
 

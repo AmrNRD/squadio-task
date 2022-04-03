@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:squadio/core/common/footer_widget.dart';
+import 'package:squadio/core/common/generic_state.dart';
 import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/bloc/person/person_bloc.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
+import 'package:squadio/modules/person/repositories/person/person_offline_data_repository.dart';
 import 'package:squadio/modules/person/repositories/person/person_online_data_repository.dart';
 import 'package:squadio/modules/person/widgets/person.card.dart';
+import 'package:squadio/modules/person/widgets/person_shimmer.card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,9 +28,11 @@ class _HomePageState extends State<HomePage> {
 
   int _status=0;
 
+  String? _errorMessage;
+
   @override
   void initState() {
-    _personBloc=PersonBloc(PersonOnlineDataRepository());
+    _personBloc=PersonBloc(PersonOfflineDataRepository());
     _personBloc.add(GetPopularPersonsEvent(page: 1));
     super.initState();
   }
@@ -68,6 +73,11 @@ class _HomePageState extends State<HomePage> {
                       _refreshController.loadComplete();
                     });
                   }
+                }else if(state is PersonErrorState){
+                  setState(() {
+                    _status=3;
+                    _errorMessage=state.message;
+                  });
                 }
               },
               child: SmartRefresher(
@@ -79,12 +89,35 @@ class _HomePageState extends State<HomePage> {
                   onRefresh: _onRefresh,
                   onLoading: _onLoading,
                   physics:const BouncingScrollPhysics(),
-                  child: ListView.builder(
-                      physics:const BouncingScrollPhysics(),
-                      itemCount: _popularPersons.length,
-                      itemBuilder: (context,index){
-                        return PersonCard(person: _popularPersons[index]);
-                      }
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        if(_popularPersons.isNotEmpty)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            primary: true,
+                            physics:const BouncingScrollPhysics(),
+                            itemCount: _popularPersons.length,
+                            itemBuilder: (context,index){
+                              return PersonCard(person: _popularPersons[index]);
+                            }
+                        ),
+
+                        if(_status==1)
+                          ListView.builder(
+                              shrinkWrap: true,
+                              primary: true,
+                              physics:const BouncingScrollPhysics(),
+                              itemCount: 6,
+                              itemBuilder: (context,index){
+                                return PersonShimmerCard();
+                              }
+                          )
+                        else if(_status==3&&_errorMessage!=null)
+                          GenericState(imagePath: "assets/icons/warning.svg", title: "Error happened", body: _errorMessage!),
+
+                      ],
+                    ),
                   )
               ),
             ),
@@ -109,4 +142,11 @@ class _HomePageState extends State<HomePage> {
     _personBloc.add(GetPopularPersonsEvent(page: _currentPage));
   }
 //</editor-fold>
+
+@override
+  void dispose() {
+    _personBloc.close();
+    _refreshController.dispose();
+    super.dispose();
+  }
 }

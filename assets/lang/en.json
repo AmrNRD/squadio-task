@@ -1,4 +1,7 @@
 {
-  "app_name": "squadio"
+  "app_name": "squadio",
+  "Error happened": "Error happened",
+  "download": "Download",
+  "knowingFor": "Knowing for: %s"
 
 }

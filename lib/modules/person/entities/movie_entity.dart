@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'generated/movie_entity.g.dart';
 
 @HiveType(typeId: 1)
-class Movie{
+class Movie extends HiveObject{
   @HiveField(0)
   final int id;
   @HiveField(1)
@@ -25,13 +25,13 @@ class Movie{
   @HiveField(9)
   final String? backdropPath;
   @HiveField(10)
-  final double popularity;
+  final double? popularity;
   @HiveField(11)
-  final double voteCount;
+  final double? voteCount;
   @HiveField(12)
   final bool video;
   @HiveField(13)
-  final double videoAverage;
+  final double? videoAverage;
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
@@ -140,10 +140,10 @@ class Movie{
       mediaType: map['media_type'].toString(),
       originalLanguage: map['original_language'].toString(),
       backdropPath: map['backdrop_path']?.toString(),
-      popularity: double.parse(map['popularity'].toString()),
-      voteCount: double.parse(map['vote_count'].toString()),
+      popularity: double.tryParse(map['popularity'].toString()),
+      voteCount: double.tryParse(map['vote_count'].toString()),
       video: map['video'].toString()=="true",
-      videoAverage: double.parse(map['video_average'].toString()),
+      videoAverage: double.tryParse(map['video_average'].toString()),
     );
   }
 

@@ -7,3 +7,13 @@ class GetPopularPersonsEvent extends PersonEvent {
   final int page;
   GetPopularPersonsEvent({this.page=1});
 }
+
+class GetPersonDetailsEvent extends PersonEvent {
+  final int id;
+  GetPersonDetailsEvent(this.id);
+}
+
+class GetPersonPhotosEvent extends PersonEvent {
+  final int id;
+  GetPersonPhotosEvent(this.id);
+}

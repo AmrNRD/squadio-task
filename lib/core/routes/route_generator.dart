@@ -5,6 +5,8 @@ import 'package:squadio/core/common/generic_state.dart';
 import 'package:squadio/core/pages/status.page.dart';
 import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/home/presentations/home.page.dart';
+import 'package:squadio/modules/person/entities/person_entity.dart';
+import 'package:squadio/modules/person/presentations/person_details.page.dart';
 import 'package:squadio/modules/splash/presentations/splash.page.dart';
 
 
@@ -19,6 +21,10 @@ class Routes {
   static const String homePage = '/home';
   static const String calendarViewsPage = '/calendar-views';
   static const String calendarTab = '/calendar-tab';
+  //</editor-fold>
+
+  //<editor-fold desc="Person Routes" defaultstate="collapsed">
+  static const String personDetailsPage = '/person-details';
   //</editor-fold>
 
   // <editor-fold desc="Extra Routes" defaultstate="collapsed">
@@ -58,6 +64,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           settings: const RouteSettings(name: Routes.homePage),
           builder: (_) => HomePage(),
+        );
+    //</editor-fold>
+
+    //<editor-fold desc="Person Routes" defaultstate="collapsed">
+      case Routes.personDetailsPage:
+        return MaterialPageRoute(
+          settings: const RouteSettings(name: Routes.personDetailsPage),
+          builder: (_) => PersonDetailsPage(person: args as Person),
         );
     //</editor-fold>
 

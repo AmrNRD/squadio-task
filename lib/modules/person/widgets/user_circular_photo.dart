@@ -18,7 +18,7 @@ class UserCircularAvatar extends StatelessWidget {
           fit: BoxFit.cover,
           imageUrl: photoUrl,
           placeholder: (context, url) => Container(margin: const EdgeInsets.all(12), width: 20, height: 20, child: const CircularProgressIndicator(strokeWidth: 1.5,color: AppColors.accentColor,)),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          errorWidget: (context, url, error) => Image.asset("assets/images/profile_pic.jpeg"),
         ),
       ),
     );

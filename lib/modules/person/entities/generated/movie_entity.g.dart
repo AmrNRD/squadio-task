@@ -27,10 +27,10 @@ class MovieAdapter extends TypeAdapter<Movie> {
       mediaType: fields[7] as String,
       originalLanguage: fields[8] as String,
       backdropPath: fields[9] as String?,
-      popularity: fields[10] as double,
-      voteCount: fields[11] as double,
+      popularity: fields[10] as double?,
+      voteCount: fields[11] as double?,
       video: fields[12] as bool,
-      videoAverage: fields[13] as double,
+      videoAverage: fields[13] as double?,
     );
   }
 

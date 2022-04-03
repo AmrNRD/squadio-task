@@ -1,3 +1,6 @@
 {
-  "app_name": "squadio"
+  "app_name": "squadio",
+  "Error happened": "حدث خطأ ما",
+  "download": "تحميل",
+  "knowingFor": "معروف بـ: %s"
 }

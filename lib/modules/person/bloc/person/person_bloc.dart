@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
+import 'package:squadio/modules/person/entities/person_photo_entity.dart';
 import 'package:squadio/modules/person/repositories/person/person_repository.dart';
 
 part 'person_event.dart';
@@ -20,11 +21,18 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
     try{
       yield PersonLoadingState();
       if(event is GetPopularPersonsEvent){
-     final Map<String,dynamic>data= await personRepository.getPopularPersons(page: event.page);
-      yield PersonsLoadedState(data['persons'] as List<Person>,data['page'] as int,data['total_pages'] as int);
+        final Map<String,dynamic>data= await personRepository.getPopularPersons(page: event.page);
+        yield PersonsLoadedState(data['persons'] as List<Person>,data['page'] as int,data['total_pages'] as int);
+      }else if(event is GetPersonDetailsEvent){
+        Person person= await personRepository.getPersonDetails(event.id);
+        yield PersonLoadedState(person);
+      }else if(event is GetPersonPhotosEvent){
+        List<PersonPhoto> personPhotos= await personRepository.getPersonPhotos(event.id);
+        yield PersonPhotosLoadedState(personPhotos);
       }
-    }catch(error){
-
+    }catch(error,st){
+      CoreUtility.safePrint(error);
+      CoreUtility.safePrint(st);
     }
   }
 }
