@@ -8,6 +8,7 @@ import 'package:loading_animations/loading_animations.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:squadio/core/app.localization.dart';
+import 'package:squadio/core/snack_bar.dart';
 import 'package:squadio/core/theme/app_colors.dart';
 
 class ImageViewInspector extends StatefulWidget {
@@ -119,6 +120,7 @@ class _ImageViewInspectorState extends State<ImageViewInspector> {
       if (imageId == null) {
         return;
       }
+      showScaffoldSnackBar(context: context, message: "Image downloaded successfully");
 
     } on PlatformException catch (error) {
       print(error);

@@ -1,8 +1,6 @@
 
 
-import 'package:hive_flutter/adapters.dart';
 import 'package:squadio/core/api_caller.dart';
-import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/env.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
 import 'package:squadio/modules/person/entities/person_photo_entity.dart';

@@ -1,6 +1,5 @@
 
 import 'package:hive/hive.dart';
-import 'package:squadio/core/utils/core.util.dart';
 
 part 'generated/tv_series_entity.g.dart';
 @HiveType(typeId: 2)

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:squadio/core/common/appbar.dart';
 import 'package:squadio/core/common/generic_state.dart';
 import 'package:squadio/core/pages/status.page.dart';
-import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/home/presentations/home.page.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
 import 'package:squadio/modules/person/presentations/person_details.page.dart';

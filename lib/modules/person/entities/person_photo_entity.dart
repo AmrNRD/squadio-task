@@ -1,12 +1,21 @@
 
-import 'package:squadio/core/utils/core.util.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class PersonPhoto {
+part 'generated/person_photo_entity.g.dart';
+
+@HiveType(typeId: 4)
+class PersonPhoto extends HiveObject{
+  @HiveField(0)
   double aspectRatio;
+  @HiveField(1)
   int height;
+  @HiveField(2)
   int width;
+  @HiveField(3)
   String? filePath;
+  @HiveField(4)
   double voteAverage;
+  @HiveField(5)
   int voteCount;
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">

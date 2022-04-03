@@ -1,13 +1,7 @@
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:squadio/core/routes/route_generator.dart';
 import 'package:squadio/core/theme/app_colors.dart';
-import 'package:squadio/modules/person/entities/person_entity.dart';
-import 'package:squadio/modules/person/widgets/user_circular_avatar_with_ring.dart';
-
-import '../../../env.dart';
 
 class PersonShimmerCard extends StatelessWidget {
 

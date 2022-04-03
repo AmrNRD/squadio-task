@@ -19,7 +19,7 @@ class APICaller {
     return {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "Authorization": Env.token??"",
+      "Authorization": Env.token,
     };
   }
 

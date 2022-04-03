@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:squadio/core/common/generic_state.dart';
 import 'package:squadio/core/routes/route_generator.dart';
-import 'package:squadio/core/theme/app_colors.dart';
 
 class StatusPage extends StatefulWidget {
   final dynamic data;

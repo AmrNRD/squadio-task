@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:squadio/core/common/footer_widget.dart';
 import 'package:squadio/core/common/generic_state.dart';
-import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/bloc/person/person_bloc.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
-import 'package:squadio/modules/person/repositories/person/person_offline_data_repository.dart';
 import 'package:squadio/modules/person/repositories/person/person_online_data_repository.dart';
 import 'package:squadio/modules/person/widgets/person.card.dart';
 import 'package:squadio/modules/person/widgets/person_shimmer.card.dart';
@@ -26,13 +24,13 @@ class _HomePageState extends State<HomePage> {
   int _currentPage=1;
   int _totalPage=1;
 
-  int _status=0;
+  int _status=1;
 
   String? _errorMessage;
 
   @override
   void initState() {
-    _personBloc=PersonBloc(PersonOfflineDataRepository());
+    _personBloc=PersonBloc(PersonOnlineDataRepository());
     _personBloc.add(GetPopularPersonsEvent(page: 1));
     super.initState();
   }
@@ -63,12 +61,6 @@ class _HomePageState extends State<HomePage> {
                   }else if(_currentPage!=_totalPage){
                     setState(() {
                       _status=2;
-                      _popularPersons.addAll(state.persons);
-                      _refreshController.loadComplete();
-                    });
-                  }else {
-                    setState(() {
-                      _status=4;
                       _popularPersons.addAll(state.persons);
                       _refreshController.loadComplete();
                     });
@@ -136,10 +128,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onLoading(){
-    setState(() {
-      _currentPage++;
-    });
-    _personBloc.add(GetPopularPersonsEvent(page: _currentPage));
+    if(_currentPage!=_totalPage){
+      setState(() {
+        _currentPage++;
+      });
+      _personBloc.add(GetPopularPersonsEvent(page: _currentPage));
+    }
   }
 //</editor-fold>
 

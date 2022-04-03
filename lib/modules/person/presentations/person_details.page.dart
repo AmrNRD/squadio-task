@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:squadio/core/app.localization.dart';
 import 'package:squadio/core/common/image.inspector.page.dart';
-import 'package:squadio/core/theme/app_colors.dart';
-import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/bloc/person/person_bloc.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
 import 'package:squadio/modules/person/entities/person_photo_entity.dart';
 import 'package:squadio/modules/person/repositories/person/person_online_data_repository.dart';
 import 'package:squadio/modules/person/widgets/details_sliver_delegate.dart';
-import 'package:squadio/modules/person/widgets/user_circular_avatar_with_ring.dart';
-
-import '../../../env.dart';
 
 class PersonDetailsPage extends StatefulWidget {
   final Person person;

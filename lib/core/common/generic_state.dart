@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:squadio/core/common/app_button.dart';
-import 'package:squadio/core/theme/app_colors.dart';
 
-import '../../env.dart';
 import '../app.localization.dart';
 
 class GenericState extends StatefulWidget {

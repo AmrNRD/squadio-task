@@ -1,8 +1,9 @@
 
 
+import 'dart:io';
+
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:squadio/core/api_caller.dart';
-import 'package:squadio/env.dart';
+import 'package:squadio/core/utils/core.util.dart';
 import 'package:squadio/modules/person/entities/person_entity.dart';
 import 'package:squadio/modules/person/entities/person_photo_entity.dart';
 import 'package:squadio/modules/person/repositories/person/person_repository.dart';
@@ -23,16 +24,57 @@ class PersonOfflineDataRepository extends PersonRepository{
     return data;
   }
 
-  @override
-  Future<List<PersonPhoto>> getPersonPhotos(int id) {
-    // TODO: implement getPersonPhotos
-    throw UnimplementedError();
+
+  setPopularPersonsInStorage(List<Person> persons) async {
+    try{
+      var box = await Hive.openBox('persons');
+      await box.addAll(persons);
+    }catch(error,st){
+      CoreUtility.safePrint(error);
+      CoreUtility.safePrint(st);
+    }
+  }
+
+  setPersonsDetailsInStorage(Person person) async {
+    try{
+      var box = await Hive.openBox('personDetails');
+      await box.put(person.id.toString(),person);
+    }catch(error,st){
+      CoreUtility.safePrint(error);
+      CoreUtility.safePrint(st);
+    }
+  }
+
+  setPersonsPhotosInStorage(int id,List<PersonPhoto> personPhoto) async {
+    try{
+      var box = await Hive.openBox('personPhotos');
+      await box.put(id.toString(),personPhoto);
+    }catch(error,st){
+      CoreUtility.safePrint(error);
+      CoreUtility.safePrint(st);
+    }
   }
 
   @override
-  Future<Person> getPersonDetails(int id) {
-    // TODO: implement getPersonDetails
-    throw UnimplementedError();
+  Future<List<PersonPhoto>> getPersonPhotos(int id) async {
+    var personPhotosBox = await Hive.openBox<List<PersonPhoto>>('personPhotos');
+    List<PersonPhoto>? personPhotos=personPhotosBox.get(id.toString());
+    if(personPhotos!=null){
+      return personPhotos;
+    }else{
+      throw HttpException("Not in storage");
+    }
+  }
+
+  @override
+  Future<Person> getPersonDetails(int id) async {
+    var personDetailsBox = await Hive.openBox<Person>('personDetails');
+    Person? person=personDetailsBox.get(id.toString());
+    if(person!=null){
+      return person;
+    }else{
+       throw HttpException("Not in storage");
+    }
   }
 
 }

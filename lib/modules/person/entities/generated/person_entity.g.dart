@@ -24,13 +24,19 @@ class PersonAdapter extends TypeAdapter<Person> {
       popularity: fields[4] as double,
       knownFor: (fields[5] as List).cast<dynamic>(),
       gender: fields[6] as int,
+      biography: fields[7] as String?,
+      knownForDepartment: fields[8] as String?,
+      placeOfBirth: fields[9] as String?,
+      homepage: fields[10] as String?,
+      imdb_id: fields[11] as String?,
+      birthday: fields[12] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Person obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +50,19 @@ class PersonAdapter extends TypeAdapter<Person> {
       ..writeByte(5)
       ..write(obj.knownFor)
       ..writeByte(6)
-      ..write(obj.gender);
+      ..write(obj.gender)
+      ..writeByte(7)
+      ..write(obj.biography)
+      ..writeByte(8)
+      ..write(obj.knownForDepartment)
+      ..writeByte(9)
+      ..write(obj.placeOfBirth)
+      ..writeByte(10)
+      ..write(obj.homepage)
+      ..writeByte(11)
+      ..write(obj.imdb_id)
+      ..writeByte(12)
+      ..write(obj.birthday);
   }
 
   @override

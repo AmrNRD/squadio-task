@@ -1,16 +1,21 @@
-# squadio
+# Squadio
 
-A new Flutter project.
 
 ## Getting Started
+This application is using api of <a target="_blank" href="https://www.themoviedb.org/">themoviedb</a>, so before using it you have to create an api from <a  target="_blank" href="https://www.themoviedb.org/">themoviedb</a> and generate an API and apply it to this application, follow the below step to connect api with this app.
 
-This project is a starting point for a Flutter application.
+First go to <a target="_blank" href="https://www.themoviedb.org/documentation/api">https://www.themoviedb.org/documentation/api</a>, and follow the API Documentation, you will get the API Code.
 
-A few resources to get you started if this is your first Flutter project:
+- go to `lib/env.dart`
+- you will see the code like this
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```dart
+  //themoviedb.org API token
+  static const String token= = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+```
+- replace the all `xx..` to your API, like this
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+  //themoviedb.org API token
+  static const String token = 'your_api_code_here';
+```

@@ -1,14 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 
 import 'core/app.localization.dart';
 import 'core/routes/route_generator.dart';
 import 'core/set_up.dart';
-import 'core/theme/app_theme.dart';
 import 'env.dart';
 
 
